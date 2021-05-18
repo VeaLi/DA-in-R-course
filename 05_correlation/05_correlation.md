@@ -14,9 +14,9 @@ library(ggplot2, warn.conflicts = FALSE)
    -  Explore data set, clean if needed ✔
    -  Explore each variable independently ✔
    -  Cross correlations ✔(?)
-   -  Build simple linear models with each predictor, check assumptions ✔(?)
+   -  Build simple linear models with each predictor, check assumptions ✔
    -  For one of the models create train-test sets, plot the model, for the test set color
-      real and predicted points differently; R^2 and p-value to title
+      real and predicted points differently; R^2 and p-value to title ✔
 
 ## Anscombe
 
