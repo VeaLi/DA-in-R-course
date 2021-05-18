@@ -4,11 +4,12 @@
 
 
 ```R
-library(mlbench)
-library(dplyr)
-library(tidyr)
-library(ggplot2)
-library(MultinomialCI)
+library(mlbench, warn.conflicts = FALSE)
+library(dplyr, warn.conflicts = FALSE)
+options(dplyr.summarise.inform = FALSE)
+library(tidyr, warn.conflicts = FALSE)
+library(ggplot2, warn.conflicts = FALSE)
+library(MultinomialCI, warn.conflicts = FALSE)
 ```
 
 
@@ -237,8 +238,8 @@ multinomialCI(tt, alpha = 0.05)
 
 
 ```R
-ci_multicat_output = function(ft, k) paste("[", round(as.vector(multinomialCI(tt, alpha = 0.05)[k, 
-    ]) * 100, 2)[1], "%,", round(as.vector(multinomialCI(tt, alpha = 0.05)[k, ]) * 
+ci_multicat_output = function(ft, k) paste("95% CI: [", round(as.vector(multinomialCI(ft, alpha = 0.05)[k, 
+    ]) * 100, 2)[1], "%,", round(as.vector(multinomialCI(ft, alpha = 0.05)[k, ]) * 
     100, 2)[2], "%]")
 ```
 
@@ -250,15 +251,15 @@ ci_multicat_output(ft = tt, k = 3)
 ```
 
 
-'[ 10.3 %, 17.78 %]'
+'95% CI: [ 10.3 %, 17.78 %]'
 
 
 
-'[ 49.54 %, 57.02 %]'
+'95% CI: [ 49.54 %, 57.02 %]'
 
 
 
-'[ 29.06 %, 36.54 %]'
+'95% CI: [ 29.06 %, 36.54 %]'
 
 
 ### Contingency Table = Cross table
@@ -375,40 +376,88 @@ fisher.test(table(df$bmi_multi, df$diabetes))
 measure_order_cat <- c("N", "Missing",
                        "NormN", "NormF", "NormCi",
                        "AbnormN", "AbnormF", "AbnormCi")
-df %>% select(bmi, diabetes) %>% 
+bmi <- df %>% select(bmi, diabetes) %>% 
     gather(key = 'Parameter', value = 'Value', -diabetes) %>% 
     group_by(diabetes, Parameter) %>% 
     summarise(N = n() - sum(is.na(Value)),
               Missing = sum(is.na(Value)),
+              
               NormN = sum(Value == 'Normal', na.rm = T),
               NormF = freq_output(NormN, N),
               NormCi = ci_cat_output(NormN, N),
+              
               AbnormN = sum(Value == 'Abnormal', na.rm = T),
               AbnormF = freq_output(AbnormN, N),
-              AbnormCi = ci_cat_output(AbnormN, N)
-    ) %>% ungroup() %>% 
+              AbnormCi = ci_cat_output(AbnormN, N)) %>% 
+
+    ungroup() %>% 
     gather(key = 'Measure', value = 'Value', -c(diabetes, Parameter)) %>% 
     spread(key = diabetes, value = Value) %>% 
-    arrange(match(Measure, measure_order_cat)) %>% 
+    arrange(match(Measure, measure_order_cat))
+
+bmi$Parameter <- c('total', 'total', 'bmi','bmi','bmi','bmi','bmi','bmi')
+```
+
+
+```R
+measure_order_cat <- c("NormN", "NormF", "NormCi",
+                       "NoSigAbnormN", "NoSigAbnormF", "NoSigAbnormCi", 
+                       "SigAbnormN", "SigAbnormF", "SigAbnormCi")
+
+
+bmi_multi <- df %>% select(bmi_multi, diabetes) %>% 
+    gather(key = 'Parameter', value = 'Value', -diabetes) %>% 
+    group_by(diabetes, Parameter) %>% 
+    summarise(N = n() - sum(is.na(Value)),
+              NormN = sum(Value == 'Normal', na.rm = T),
+              NormF = freq_output(NormN, N),
+              NormCi = ci_multicat_output(ft = table(Value), k = 1),
+              
+              NoSigAbnormN = sum(Value == 'NoSig Abnorm', na.rm = T),
+              NoSigAbnormF = freq_output(NoSigAbnormN, N),
+              NoSigAbnormCi = ci_multicat_output(ft = table(Value), k = 2),
+              
+              SigAbnormN = sum(Value == 'Sig Abnorm', na.rm = T),
+              SigAbnormF = freq_output(SigAbnormN, N),
+              SigAbnormCi = ci_multicat_output(ft = table(Value), k = 3)) %>% 
+
+    ungroup() %>% 
+    gather(key = 'Measure', value = 'Value', -c(diabetes, Parameter)) %>% 
+    spread(key = diabetes, value = Value) %>% 
+    arrange(match(Measure, measure_order_cat))
+
+
+bmi_multi <- bmi_multi[bmi_multi$Measure!='N',]
+```
+
+
+```R
+rbind(bmi, bmi_multi)%>% 
     knitr::kable()
 ```
 
-    `summarise()` has grouped output by 'diabetes'. You can override using the `.groups` argument.
-    
-
 
     
     
-    |Parameter |Measure  |neg                        |pos                         |
-    |:---------|:--------|:--------------------------|:---------------------------|
-    |bmi       |N        |491                        |266                         |
-    |bmi       |Missing  |9                          |2                           |
-    |bmi       |NormN    |99                         |7                           |
-    |bmi       |NormF    |99 / 491 ( 20 %)           |7 / 266 ( 3 %)              |
-    |bmi       |NormCi   |95% CI: [ 16.7 %, 23.99 %] |95% CI: [ 1.06 %, 5.35 %]   |
-    |bmi       |AbnormN  |392                        |259                         |
-    |bmi       |AbnormF  |392 / 491 ( 80 %)          |259 / 266 ( 97 %)           |
-    |bmi       |AbnormCi |95% CI: [ 76.01 %, 83.3 %] |95% CI: [ 94.65 %, 98.94 %] |
+    |Parameter |Measure       |neg                         |pos                         |
+    |:---------|:-------------|:---------------------------|:---------------------------|
+    |total     |N             |491                         |266                         |
+    |total     |Missing       |9                           |2                           |
+    |bmi       |NormN         |99                          |7                           |
+    |bmi       |NormF         |99 / 491 ( 20 %)            |7 / 266 ( 3 %)              |
+    |bmi       |NormCi        |95% CI: [ 16.7 %, 23.99 %]  |95% CI: [ 1.06 %, 5.35 %]   |
+    |bmi       |AbnormN       |392                         |259                         |
+    |bmi       |AbnormF       |392 / 491 ( 80 %)           |259 / 266 ( 97 %)           |
+    |bmi       |AbnormCi      |95% CI: [ 76.01 %, 83.3 %]  |95% CI: [ 94.65 %, 98.94 %] |
+    |bmi_multi |NormN         |99                          |7                           |
+    |bmi_multi |NormF         |99 / 491 ( 20 %)            |7 / 266 ( 3 %)              |
+    |bmi_multi |NormCi        |95% CI: [ 15.68 %, 24.95 %] |95% CI: [ 0 %, 9.01 %]      |
+    |bmi_multi |NoSigAbnormN  |262                         |141                         |
+    |bmi_multi |NoSigAbnormF  |262 / 491 ( 53 %)           |141 / 266 ( 53 %)           |
+    |bmi_multi |NoSigAbnormCi |95% CI: [ 48.88 %, 58.15 %] |95% CI: [ 46.99 %, 59.39 %] |
+    |bmi_multi |SigAbnormN    |130                         |118                         |
+    |bmi_multi |SigAbnormF    |130 / 491 ( 26 %)           |118 / 266 ( 44 %)           |
+    |bmi_multi |SigAbnormCi   |95% CI: [ 22 %, 31.27 %]    |95% CI: [ 38.35 %, 50.74 %] |
 
 
 
