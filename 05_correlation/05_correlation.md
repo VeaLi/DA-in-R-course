@@ -1,9 +1,19 @@
 ```R
+options(repr.plot.width = 5, repr.plot.height = 5)
+```
+
+
+```R
 library(dplyr, warn.conflicts = FALSE)
 options(dplyr.summarise.inform = FALSE)
 library(tidyr, warn.conflicts = FALSE)
 library(ggplot2, warn.conflicts = FALSE)
 ```
+
+    Warning message:
+    "package 'dplyr' was built under R version 3.6.3"Warning message:
+    "package 'tidyr' was built under R version 3.6.3"Warning message:
+    "package 'ggplot2' was built under R version 3.6.3"
 
 - Anscombe’s data set:
    -  Scatter plot facetted by set ✔
@@ -85,7 +95,7 @@ p + facet_wrap(~XY, ncol = 2)
 
 
     
-![png](output_6_1.png)
+![png](output_7_1.png)
     
 
 
@@ -161,12 +171,10 @@ dim(df)
 ```
 
 
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>9471</li><li>17</li></ol>
+<ol class=list-inline>
+	<li>9471</li>
+	<li>17</li>
+</ol>
 
 
 
@@ -244,23 +252,20 @@ calculate_sample_summary(df[3:15])
 ```
 
 
-<table class="dataframe">
-<caption>A matrix: 11 × 13 of type chr</caption>
-<thead>
-	<tr><th></th><th scope=col>CO.GT.</th><th scope=col>PT08.S1.CO.</th><th scope=col>NMHC.GT.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>NOx.GT.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>NO2.GT.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr>
-</thead>
+<table>
+<thead><tr><th></th><th scope=col>CO.GT.</th><th scope=col>PT08.S1.CO.</th><th scope=col>NMHC.GT.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>NOx.GT.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>NO2.GT.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr></thead>
 <tbody>
-	<tr><th scope=row>N. Valid</th><td>7674       </td><td>8991             </td><td> 914           </td><td>8991        </td><td>8991           </td><td>7718           </td><td>8991          </td><td>7715           </td><td>8991             </td><td>8991             </td><td>8991        </td><td>8991         </td><td>8991       </td></tr>
-	<tr><th scope=row>N. Missing</th><td>1683       </td><td> 366             </td><td>8443           </td><td> 366        </td><td> 366           </td><td>1639           </td><td> 366          </td><td>1642           </td><td> 366             </td><td> 366             </td><td> 366        </td><td> 366         </td><td> 366       </td></tr>
-	<tr><th scope=row>Mean</th><td>   2.15    </td><td>1099.83          </td><td> 218.81        </td><td>  10.08     </td><td> 939.15        </td><td> 246.90        </td><td> 835.49       </td><td> 113.09        </td><td>1456.26          </td><td>1022.91          </td><td>  18.32     </td><td>  49.23      </td><td>   1.03    </td></tr>
-	<tr><th scope=row>95% CI</th><td>2.12 : 2.19</td><td>1095.35 : 1104.32</td><td>205.54 : 232.08</td><td>9.93 : 10.24</td><td>933.64 : 944.67</td><td>242.14 : 251.65</td><td>830.18 : 840.8</td><td>112.01 : 114.17</td><td>1449.11 : 1463.42</td><td>1014.67 : 1031.14</td><td>18.14 : 18.5</td><td>48.88 : 49.59</td><td>1.02 : 1.03</td></tr>
-	<tr><th scope=row>Std</th><td>  1.45     </td><td>217.08           </td><td>204.46         </td><td>  7.45      </td><td>266.83         </td><td>212.98         </td><td>256.82        </td><td> 48.37         </td><td>346.21           </td><td>398.48           </td><td>  8.83      </td><td> 17.32       </td><td>  0.40     </td></tr>
-	<tr><th scope=row>Min</th><td>  0.10     </td><td>647.00           </td><td>  7.00         </td><td>  0.10      </td><td>383.00         </td><td>  2.00         </td><td>322.00        </td><td>  2.00         </td><td>551.00           </td><td>221.00           </td><td> -1.90      </td><td>  9.20       </td><td>  0.18     </td></tr>
-	<tr><th scope=row>Q1</th><td>   1.10    </td><td> 937.00          </td><td>  67.00        </td><td>   4.40     </td><td> 734.50        </td><td>  98.00        </td><td> 658.00       </td><td>  78.00        </td><td>1227.00          </td><td> 731.50          </td><td>  11.80     </td><td>  35.80      </td><td>   0.74    </td></tr>
-	<tr><th scope=row>Median</th><td>   1.8     </td><td>1063.0           </td><td> 150.0         </td><td>   8.2      </td><td> 909.0         </td><td> 180.0         </td><td> 806.0        </td><td> 109.0         </td><td>1463.0           </td><td> 963.0           </td><td>  17.8      </td><td>  49.6       </td><td>   1.0     </td></tr>
-	<tr><th scope=row>Q3</th><td>   2.90    </td><td>1231.00          </td><td> 297.00        </td><td>  14.00     </td><td>1116.00        </td><td> 326.00        </td><td> 969.50       </td><td> 142.00        </td><td>1674.00          </td><td>1273.50          </td><td>  24.40     </td><td>  62.50      </td><td>   1.31    </td></tr>
-	<tr><th scope=row>Max</th><td>  11.90    </td><td>2040.00          </td><td>1189.00        </td><td>  63.70     </td><td>2214.00        </td><td>1479.00        </td><td>2683.00       </td><td> 340.00        </td><td>2775.00          </td><td>2523.00          </td><td>  44.60     </td><td>  88.70      </td><td>   2.23    </td></tr>
-	<tr><th scope=row>IQR</th><td>  1.80     </td><td>294.00           </td><td>230.00         </td><td>  9.60      </td><td>381.50         </td><td>228.00         </td><td>311.50        </td><td> 64.00         </td><td>447.00           </td><td>542.00           </td><td> 12.60      </td><td> 26.70       </td><td>  0.57     </td></tr>
+	<tr><th scope=row>N. Valid</th><td>7674             </td><td>8991             </td><td> 914             </td><td>8991             </td><td>8991             </td><td>7718             </td><td>8991             </td><td>7715             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td></tr>
+	<tr><th scope=row>N. Missing</th><td>1683             </td><td> 366             </td><td>8443             </td><td> 366             </td><td> 366             </td><td>1639             </td><td> 366             </td><td>1642             </td><td> 366             </td><td> 366             </td><td> 366             </td><td> 366             </td><td> 366             </td></tr>
+	<tr><th scope=row>Mean</th><td>   2.15          </td><td>1099.83          </td><td> 218.81          </td><td>  10.08          </td><td> 939.15          </td><td> 246.90          </td><td> 835.49          </td><td> 113.09          </td><td>1456.26          </td><td>1022.91          </td><td>  18.32          </td><td>  49.23          </td><td>   1.03          </td></tr>
+	<tr><th scope=row>95% CI</th><td>2.12 : 2.19      </td><td>1095.35 : 1104.32</td><td>205.54 : 232.08  </td><td>9.93 : 10.24     </td><td>933.64 : 944.67  </td><td>242.14 : 251.65  </td><td>830.18 : 840.8   </td><td>112.01 : 114.17  </td><td>1449.11 : 1463.42</td><td>1014.67 : 1031.14</td><td>18.14 : 18.5     </td><td>48.88 : 49.59    </td><td>1.02 : 1.03      </td></tr>
+	<tr><th scope=row>Std</th><td>  1.45           </td><td>217.08           </td><td>204.46           </td><td>  7.45           </td><td>266.83           </td><td>212.98           </td><td>256.82           </td><td> 48.37           </td><td>346.21           </td><td>398.48           </td><td>  8.83           </td><td> 17.32           </td><td>  0.40           </td></tr>
+	<tr><th scope=row>Min</th><td>  0.10           </td><td>647.00           </td><td>  7.00           </td><td>  0.10           </td><td>383.00           </td><td>  2.00           </td><td>322.00           </td><td>  2.00           </td><td>551.00           </td><td>221.00           </td><td> -1.90           </td><td>  9.20           </td><td>  0.18           </td></tr>
+	<tr><th scope=row>Q1</th><td>   1.10          </td><td> 937.00          </td><td>  67.00          </td><td>   4.40          </td><td> 734.50          </td><td>  98.00          </td><td> 658.00          </td><td>  78.00          </td><td>1227.00          </td><td> 731.50          </td><td>  11.80          </td><td>  35.80          </td><td>   0.74          </td></tr>
+	<tr><th scope=row>Median</th><td>   1.8           </td><td>1063.0           </td><td> 150.0           </td><td>   8.2           </td><td> 909.0           </td><td> 180.0           </td><td> 806.0           </td><td> 109.0           </td><td>1463.0           </td><td> 963.0           </td><td>  17.8           </td><td>  49.6           </td><td>   1.0           </td></tr>
+	<tr><th scope=row>Q3</th><td>   2.90          </td><td>1231.00          </td><td> 297.00          </td><td>  14.00          </td><td>1116.00          </td><td> 326.00          </td><td> 969.50          </td><td> 142.00          </td><td>1674.00          </td><td>1273.50          </td><td>  24.40          </td><td>  62.50          </td><td>   1.31          </td></tr>
+	<tr><th scope=row>Max</th><td>  11.90          </td><td>2040.00          </td><td>1189.00          </td><td>  63.70          </td><td>2214.00          </td><td>1479.00          </td><td>2683.00          </td><td> 340.00          </td><td>2775.00          </td><td>2523.00          </td><td>  44.60          </td><td>  88.70          </td><td>   2.23          </td></tr>
+	<tr><th scope=row>IQR</th><td>  1.80           </td><td>294.00           </td><td>230.00           </td><td>  9.60           </td><td>381.50           </td><td>228.00           </td><td>311.50           </td><td> 64.00           </td><td>447.00           </td><td>542.00           </td><td> 12.60           </td><td> 26.70           </td><td>  0.57           </td></tr>
 </tbody>
 </table>
 
@@ -279,12 +284,8 @@ df[8075:8100, 3:11]
 ```
 
 
-<table class="dataframe">
-<caption>A data.frame: 26 × 9</caption>
-<thead>
-	<tr><th></th><th scope=col>PT08.S1.CO.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr>
-	<tr><th></th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;int&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
+<table>
+<thead><tr><th></th><th scope=col>PT08.S1.CO.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr></thead>
 <tbody>
 	<tr><th scope=row>8075</th><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
 	<tr><th scope=row>8076</th><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td><td>NA</td></tr>
@@ -326,33 +327,28 @@ calculate_sample_summary(df[3:11])
 ```
 
 
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>8991</li><li>11</li></ol>
+<ol class=list-inline>
+	<li>8991</li>
+	<li>11</li>
+</ol>
 
 
 
 
-<table class="dataframe">
-<caption>A matrix: 11 × 9 of type chr</caption>
-<thead>
-	<tr><th></th><th scope=col>PT08.S1.CO.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr>
-</thead>
+<table>
+<thead><tr><th></th><th scope=col>PT08.S1.CO.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr></thead>
 <tbody>
-	<tr><th scope=row>N. Valid</th><td>8991             </td><td>8991        </td><td>8991           </td><td>8991          </td><td>8991             </td><td>8991             </td><td>8991        </td><td>8991         </td><td>8991       </td></tr>
-	<tr><th scope=row>N. Missing</th><td>0                </td><td>0           </td><td>0              </td><td>0             </td><td>0                </td><td>0                </td><td>0           </td><td>0            </td><td>0          </td></tr>
-	<tr><th scope=row>Mean</th><td>1099.83          </td><td>  10.08     </td><td> 939.15        </td><td> 835.49       </td><td>1456.26          </td><td>1022.91          </td><td>  18.32     </td><td>  49.23      </td><td>   1.03    </td></tr>
-	<tr><th scope=row>95% CI</th><td>1095.35 : 1104.32</td><td>9.93 : 10.24</td><td>933.64 : 944.67</td><td>830.18 : 840.8</td><td>1449.11 : 1463.42</td><td>1014.67 : 1031.14</td><td>18.14 : 18.5</td><td>48.88 : 49.59</td><td>1.02 : 1.03</td></tr>
-	<tr><th scope=row>Std</th><td>217.08           </td><td>  7.45      </td><td>266.83         </td><td>256.82        </td><td>346.21           </td><td>398.48           </td><td>  8.83      </td><td> 17.32       </td><td>  0.40     </td></tr>
-	<tr><th scope=row>Min</th><td>647.00           </td><td>  0.10      </td><td>383.00         </td><td>322.00        </td><td>551.00           </td><td>221.00           </td><td> -1.90      </td><td>  9.20       </td><td>  0.18     </td></tr>
-	<tr><th scope=row>Q1</th><td> 937.00          </td><td>   4.40     </td><td> 734.50        </td><td> 658.00       </td><td>1227.00          </td><td> 731.50          </td><td>  11.80     </td><td>  35.80      </td><td>   0.74    </td></tr>
-	<tr><th scope=row>Median</th><td>1063.0           </td><td>   8.2      </td><td> 909.0         </td><td> 806.0        </td><td>1463.0           </td><td> 963.0           </td><td>  17.8      </td><td>  49.6       </td><td>   1.0     </td></tr>
-	<tr><th scope=row>Q3</th><td>1231.00          </td><td>  14.00     </td><td>1116.00        </td><td> 969.50       </td><td>1674.00          </td><td>1273.50          </td><td>  24.40     </td><td>  62.50      </td><td>   1.31    </td></tr>
-	<tr><th scope=row>Max</th><td>2040.00          </td><td>  63.70     </td><td>2214.00        </td><td>2683.00       </td><td>2775.00          </td><td>2523.00          </td><td>  44.60     </td><td>  88.70      </td><td>   2.23    </td></tr>
-	<tr><th scope=row>IQR</th><td>294.00           </td><td>  9.60      </td><td>381.50         </td><td>311.50        </td><td>447.00           </td><td>542.00           </td><td> 12.60      </td><td> 26.70       </td><td>  0.57     </td></tr>
+	<tr><th scope=row>N. Valid</th><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td></tr>
+	<tr><th scope=row>N. Missing</th><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td></tr>
+	<tr><th scope=row>Mean</th><td>1099.83          </td><td>  10.08          </td><td> 939.15          </td><td> 835.49          </td><td>1456.26          </td><td>1022.91          </td><td>  18.32          </td><td>  49.23          </td><td>   1.03          </td></tr>
+	<tr><th scope=row>95% CI</th><td>1095.35 : 1104.32</td><td>9.93 : 10.24     </td><td>933.64 : 944.67  </td><td>830.18 : 840.8   </td><td>1449.11 : 1463.42</td><td>1014.67 : 1031.14</td><td>18.14 : 18.5     </td><td>48.88 : 49.59    </td><td>1.02 : 1.03      </td></tr>
+	<tr><th scope=row>Std</th><td>217.08           </td><td>  7.45           </td><td>266.83           </td><td>256.82           </td><td>346.21           </td><td>398.48           </td><td>  8.83           </td><td> 17.32           </td><td>  0.40           </td></tr>
+	<tr><th scope=row>Min</th><td>647.00           </td><td>  0.10           </td><td>383.00           </td><td>322.00           </td><td>551.00           </td><td>221.00           </td><td> -1.90           </td><td>  9.20           </td><td>  0.18           </td></tr>
+	<tr><th scope=row>Q1</th><td> 937.00          </td><td>   4.40          </td><td> 734.50          </td><td> 658.00          </td><td>1227.00          </td><td> 731.50          </td><td>  11.80          </td><td>  35.80          </td><td>   0.74          </td></tr>
+	<tr><th scope=row>Median</th><td>1063.0           </td><td>   8.2           </td><td> 909.0           </td><td> 806.0           </td><td>1463.0           </td><td> 963.0           </td><td>  17.8           </td><td>  49.6           </td><td>   1.0           </td></tr>
+	<tr><th scope=row>Q3</th><td>1231.00          </td><td>  14.00          </td><td>1116.00          </td><td> 969.50          </td><td>1674.00          </td><td>1273.50          </td><td>  24.40          </td><td>  62.50          </td><td>   1.31          </td></tr>
+	<tr><th scope=row>Max</th><td>2040.00          </td><td>  63.70          </td><td>2214.00          </td><td>2683.00          </td><td>2775.00          </td><td>2523.00          </td><td>  44.60          </td><td>  88.70          </td><td>   2.23          </td></tr>
+	<tr><th scope=row>IQR</th><td>294.00           </td><td>  9.60           </td><td>381.50           </td><td>311.50           </td><td>447.00           </td><td>542.00           </td><td> 12.60           </td><td> 26.70           </td><td>  0.57           </td></tr>
 </tbody>
 </table>
 
@@ -386,7 +382,7 @@ p + facet_wrap(~key, ncol = 3, scales = "free") + theme_minimal()
 
 
     
-![png](output_19_0.png)
+![png](output_20_0.png)
     
 
 
@@ -398,7 +394,7 @@ plot(df$PT08.S3.NOx., main = 'before')
 
 
     
-![png](output_20_0.png)
+![png](output_21_0.png)
     
 
 
@@ -410,7 +406,7 @@ plot(df$T)
 
 
     
-![png](output_21_0.png)
+![png](output_22_0.png)
     
 
 
@@ -422,7 +418,7 @@ plot(df$AH)
 
 
     
-![png](output_22_0.png)
+![png](output_23_0.png)
     
 
 
@@ -463,23 +459,20 @@ calculate_sample_summary(df[3:11])
 ```
 
 
-<table class="dataframe">
-<caption>A matrix: 11 × 9 of type chr</caption>
-<thead>
-	<tr><th></th><th scope=col>PT08.S1.CO.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr>
-</thead>
+<table>
+<thead><tr><th></th><th scope=col>PT08.S1.CO.</th><th scope=col>C6H6.GT.</th><th scope=col>PT08.S2.NMHC.</th><th scope=col>PT08.S3.NOx.</th><th scope=col>PT08.S4.NO2.</th><th scope=col>PT08.S5.O3.</th><th scope=col>T</th><th scope=col>RH</th><th scope=col>AH</th></tr></thead>
 <tbody>
-	<tr><th scope=row>N. Valid</th><td>8991             </td><td>8991      </td><td>8991           </td><td>8991          </td><td>8991             </td><td>8991             </td><td>8991        </td><td>8991         </td><td>8991       </td></tr>
-	<tr><th scope=row>N. Missing</th><td>0                </td><td>0         </td><td>0              </td><td>0             </td><td>0                </td><td>0                </td><td>0           </td><td>0            </td><td>0          </td></tr>
-	<tr><th scope=row>Mean</th><td>1099.83          </td><td>   9.63   </td><td> 939.15        </td><td> 821.81       </td><td>1456.26          </td><td>1022.91          </td><td>  18.32     </td><td>  49.23      </td><td>   1.03    </td></tr>
-	<tr><th scope=row>95% CI</th><td>1095.35 : 1104.32</td><td>9.5 : 9.76</td><td>933.64 : 944.67</td><td>817.2 : 826.42</td><td>1449.11 : 1463.42</td><td>1014.67 : 1031.14</td><td>18.14 : 18.5</td><td>48.88 : 49.59</td><td>1.02 : 1.03</td></tr>
-	<tr><th scope=row>Std</th><td>217.08           </td><td>  6.40    </td><td>266.83         </td><td>222.88        </td><td>346.21           </td><td>398.48           </td><td>  8.83      </td><td> 17.32       </td><td>  0.40     </td></tr>
-	<tr><th scope=row>Min</th><td>647.00           </td><td>  0.10    </td><td>383.00         </td><td>322.00        </td><td>551.00           </td><td>221.00           </td><td> -1.90      </td><td>  9.20       </td><td>  0.18     </td></tr>
-	<tr><th scope=row>Q1</th><td> 937.00          </td><td>   4.40   </td><td> 734.50        </td><td> 658.00       </td><td>1227.00          </td><td> 731.50          </td><td>  11.80     </td><td>  35.80      </td><td>   0.74    </td></tr>
-	<tr><th scope=row>Median</th><td>1063.0           </td><td>   8.2    </td><td> 909.0         </td><td> 805.0        </td><td>1463.0           </td><td> 963.0           </td><td>  17.8      </td><td>  49.6       </td><td>   1.0     </td></tr>
-	<tr><th scope=row>Q3</th><td>1231.00          </td><td>  13.70   </td><td>1116.00        </td><td> 968.00       </td><td>1674.00          </td><td>1273.50          </td><td>  24.40     </td><td>  62.50      </td><td>   1.31    </td></tr>
-	<tr><th scope=row>Max</th><td>2040.00          </td><td>  28.40   </td><td>2214.00        </td><td>1436.00       </td><td>2775.00          </td><td>2523.00          </td><td>  44.60     </td><td>  88.70      </td><td>   2.23    </td></tr>
-	<tr><th scope=row>IQR</th><td>294.00           </td><td>  9.30    </td><td>381.50         </td><td>310.00        </td><td>447.00           </td><td>542.00           </td><td> 12.60      </td><td> 26.70       </td><td>  0.57     </td></tr>
+	<tr><th scope=row>N. Valid</th><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td><td>8991             </td></tr>
+	<tr><th scope=row>N. Missing</th><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td><td>0                </td></tr>
+	<tr><th scope=row>Mean</th><td>1099.83          </td><td>   9.63          </td><td> 939.15          </td><td> 821.81          </td><td>1456.26          </td><td>1022.91          </td><td>  18.32          </td><td>  49.23          </td><td>   1.03          </td></tr>
+	<tr><th scope=row>95% CI</th><td>1095.35 : 1104.32</td><td>9.5 : 9.76       </td><td>933.64 : 944.67  </td><td>817.2 : 826.42   </td><td>1449.11 : 1463.42</td><td>1014.67 : 1031.14</td><td>18.14 : 18.5     </td><td>48.88 : 49.59    </td><td>1.02 : 1.03      </td></tr>
+	<tr><th scope=row>Std</th><td>217.08           </td><td>  6.40           </td><td>266.83           </td><td>222.88           </td><td>346.21           </td><td>398.48           </td><td>  8.83           </td><td> 17.32           </td><td>  0.40           </td></tr>
+	<tr><th scope=row>Min</th><td>647.00           </td><td>  0.10           </td><td>383.00           </td><td>322.00           </td><td>551.00           </td><td>221.00           </td><td> -1.90           </td><td>  9.20           </td><td>  0.18           </td></tr>
+	<tr><th scope=row>Q1</th><td> 937.00          </td><td>   4.40          </td><td> 734.50          </td><td> 658.00          </td><td>1227.00          </td><td> 731.50          </td><td>  11.80          </td><td>  35.80          </td><td>   0.74          </td></tr>
+	<tr><th scope=row>Median</th><td>1063.0           </td><td>   8.2           </td><td> 909.0           </td><td> 805.0           </td><td>1463.0           </td><td> 963.0           </td><td>  17.8           </td><td>  49.6           </td><td>   1.0           </td></tr>
+	<tr><th scope=row>Q3</th><td>1231.00          </td><td>  13.70          </td><td>1116.00          </td><td> 968.00          </td><td>1674.00          </td><td>1273.50          </td><td>  24.40          </td><td>  62.50          </td><td>   1.31          </td></tr>
+	<tr><th scope=row>Max</th><td>2040.00          </td><td>  28.40          </td><td>2214.00          </td><td>1436.00          </td><td>2775.00          </td><td>2523.00          </td><td>  44.60          </td><td>  88.70          </td><td>   2.23          </td></tr>
+	<tr><th scope=row>IQR</th><td>294.00           </td><td>  9.30           </td><td>381.50           </td><td>310.00           </td><td>447.00           </td><td>542.00           </td><td> 12.60           </td><td> 26.70           </td><td>  0.57           </td></tr>
 </tbody>
 </table>
 
@@ -492,91 +485,19 @@ plot(df$PT08.S3.NOx., main = 'After')
 
 
     
-![png](output_25_0.png)
+![png](output_26_0.png)
     
 
 
 
 ```R
 # cross correlation
-ACF <- list()
-for (col1 in colnames(df[3:11])) {
-    for (col2 in colnames(df[3:11])) {
-        acf <- ccf(df[, col1], df[, col2], lag.max = 31, type = c("correlation"), 
-            plot = F)$acf
-        ACF[[col1]][[col2]] <- acf
-    }
-}
-```
-
-
-```R
-colors <- rainbow(9)
-names(colors) <- names(ACF)
-for (col1 in names(ACF)) {
-    plot(ACF[[col1]][[col1]], ylim = c(-1, 1), ylab = "Cross Correlation", main = col1, 
-        col = "black", lwd = 2)
-
-    for (col2 in names(ACF[[col1]])) {
-        c = colors[[col2]]
-        lines(ACF[[col1]][[col2]], col = c, lwd = 2)
-    }
-    
-    legend(0, 1, col = colors, legend = names(ACF[[col1]]), lty = 1, cex = 0.8)
-}
+corrplot::corrplot(cor(df[3:11], method = 'spearman'), method = "ellipse", type = "lower", order = "hclust")
 ```
 
 
     
 ![png](output_27_0.png)
-    
-
-
-
-    
-![png](output_27_1.png)
-    
-
-
-
-    
-![png](output_27_2.png)
-    
-
-
-
-    
-![png](output_27_3.png)
-    
-
-
-
-    
-![png](output_27_4.png)
-    
-
-
-
-    
-![png](output_27_5.png)
-    
-
-
-
-    
-![png](output_27_6.png)
-    
-
-
-
-    
-![png](output_27_7.png)
-    
-
-
-
-    
-![png](output_27_8.png)
     
 
 
@@ -587,12 +508,19 @@ colnames(df)
 ```
 
 
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>'Date'</li><li>'Time'</li><li>'PT08.S1.CO.'</li><li>'C6H6.GT.'</li><li>'PT08.S2.NMHC.'</li><li>'PT08.S3.NOx.'</li><li>'PT08.S4.NO2.'</li><li>'PT08.S5.O3.'</li><li>'T'</li><li>'RH'</li><li>'AH'</li></ol>
+<ol class=list-inline>
+	<li>'Date'</li>
+	<li>'Time'</li>
+	<li>'PT08.S1.CO.'</li>
+	<li>'C6H6.GT.'</li>
+	<li>'PT08.S2.NMHC.'</li>
+	<li>'PT08.S3.NOx.'</li>
+	<li>'PT08.S4.NO2.'</li>
+	<li>'PT08.S5.O3.'</li>
+	<li>'T'</li>
+	<li>'RH'</li>
+	<li>'AH'</li>
+</ol>
 
 
 
@@ -618,7 +546,7 @@ plot(mod, which = 2:3)
 ```
 
 
--1.88446902795017e-17
+-1.4745091663805e-16
 
 
 
@@ -651,7 +579,7 @@ plot(mod, which = 2:3)
 ```
 
 
-3.94749977463019e-15
+-4.2022515671481e-15
 
 
 
@@ -684,7 +612,7 @@ plot(mod, which = 2:3)
 ```
 
 
-1.56102068085163e-14
+1.35292270472387e-14
 
 
 
@@ -717,7 +645,7 @@ plot(mod, which = 2:3)
 ```
 
 
-4.74405238087993e-14
+2.05713361297366e-14
 
 
 
@@ -750,7 +678,7 @@ plot(mod, which = 2:3)
 ```
 
 
-6.59777599649682e-17
+9.07949984058419e-15
 
 
 
@@ -783,7 +711,7 @@ plot(mod, which = 2:3)
 ```
 
 
--2.97002949798554e-16
+-1.05238771823968e-15
 
 
 
@@ -816,7 +744,7 @@ plot(mod, which = 2:3)
 ```
 
 
-8.73100545136602e-16
+-9.69521920697992e-16
 
 
 
@@ -849,7 +777,7 @@ plot(mod, which = 2:3)
 ```
 
 
-6.19842276986069e-17
+1.7585322710981e-17
 
 
 
@@ -875,27 +803,27 @@ set.seed(47)
 sample <- sample.int(n = nrow(df), size = floor(.75*nrow(df))) 
 train <- df[sample, ]
 test <- df[-sample, ]
-mod <- lm(data = df, PT08.S2.NMHC.~ PT08.S1.CO.)
+mod <- lm(data = df,PT08.S1.CO. ~PT08.S2.NMHC.)
 summary(mod)
 ```
 
 
     
     Call:
-    lm(formula = PT08.S2.NMHC. ~ PT08.S1.CO., data = df)
+    lm(formula = PT08.S1.CO. ~ PT08.S2.NMHC., data = df)
     
     Residuals:
         Min      1Q  Median      3Q     Max 
-    -434.24  -81.46   -2.87   77.08  951.96 
+    -631.97  -65.13   -6.80   61.68  477.18 
     
     Coefficients:
-                  Estimate Std. Error t value Pr(>|t|)    
-    (Intercept) -2.680e+02  6.542e+00  -40.97   <2e-16 ***
-    PT08.S1.CO.  1.098e+00  5.836e-03  188.09   <2e-16 ***
+                   Estimate Std. Error t value Pr(>|t|)    
+    (Intercept)   4.176e+02  3.771e+00   110.7   <2e-16 ***
+    PT08.S2.NMHC. 7.265e-01  3.862e-03   188.1   <2e-16 ***
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     
-    Residual standard error: 120.1 on 8989 degrees of freedom
+    Residual standard error: 97.72 on 8989 degrees of freedom
     Multiple R-squared:  0.7974,	Adjusted R-squared:  0.7974 
     F-statistic: 3.538e+04 on 1 and 8989 DF,  p-value: < 2.2e-16
     
@@ -918,47 +846,25 @@ ggplot(data = train, aes(x = PT08.S2.NMHC., y = PT08.S1.CO.)) + geom_point() + g
 
 ```R
 pred <- predict(mod, newdata = test)
-```
 
-
-```R
 long <- gather(data.frame(true = test$PT08.S1.CO., predicted = pred))
-long$x <- c(test$PT08.S2.NMHC.,test$PT08.S2.NMHC.)
-```
+long$Titan <- c(test$PT08.S2.NMHC.,test$PT08.S2.NMHC.)
+colnames(long) <- c('key','CO2', 'Titan')
 
-
-```R
 r2 <- summary(mod)$r.squared
 pval <- summary(mod)$coefficients[1,4]
 ```
 
 
 ```R
-p <- ggplot(long, aes(x=x, y=value, col = key)) + 
+p <- ggplot(long, aes(x=Titan, y=CO2, col = key)) + 
   geom_point()
 
-p + ggtitle(paste("R^2 :", round(r2*100,2), ", pvalue : ~", pval, " :: CO2 by titan concentration"))
+p + ggtitle(paste("R^2 :", round(r2*100,2), ", pvalue : ", as.character(signif(pval, 3)), " :: CO2 by titan concentration"))
 ```
 
 
     
-![png](output_43_0.png)
+![png](output_41_0.png)
     
 
-
-
-```R
-plot(test$PT08.S2.NMHC.)
-lines(test$PT08.S1.CO.)
-```
-
-
-    
-![png](output_44_0.png)
-    
-
-
-
-```R
-
-```
