@@ -4,7 +4,7 @@
 
 
 ```R
-
+options(repr.plot.width = 6, repr.plot.height = 2)
 ```
 
 
