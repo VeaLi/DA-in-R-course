@@ -4,6 +4,11 @@
 
 
 ```R
+
+```
+
+
+```R
 library(mlbench, warn.conflicts = FALSE)
 library(dplyr, warn.conflicts = FALSE)
 options(dplyr.summarise.inform = FALSE)
@@ -11,6 +16,13 @@ library(tidyr, warn.conflicts = FALSE)
 library(ggplot2, warn.conflicts = FALSE)
 library(MultinomialCI, warn.conflicts = FALSE)
 ```
+
+    Warning message:
+    "package 'mlbench' was built under R version 3.6.3"Warning message:
+    "package 'dplyr' was built under R version 3.6.3"Warning message:
+    "package 'tidyr' was built under R version 3.6.3"Warning message:
+    "package 'ggplot2' was built under R version 3.6.3"Warning message:
+    "package 'MultinomialCI' was built under R version 3.6.3"
 
 
 ```R
@@ -38,7 +50,7 @@ for (param in numericals) {
 
 
     
-![png](output_4_1.png)
+![png](output_5_1.png)
     
 
 
@@ -47,7 +59,7 @@ for (param in numericals) {
 
 
     
-![png](output_4_3.png)
+![png](output_5_3.png)
     
 
 
@@ -56,7 +68,7 @@ for (param in numericals) {
 
 
     
-![png](output_4_5.png)
+![png](output_5_5.png)
     
 
 
@@ -65,25 +77,25 @@ for (param in numericals) {
 
 
     
-![png](output_4_7.png)
+![png](output_5_7.png)
     
 
 
 
     
-![png](output_4_8.png)
+![png](output_5_8.png)
     
 
 
 
     
-![png](output_4_9.png)
+![png](output_5_9.png)
     
 
 
 
     
-![png](output_4_10.png)
+![png](output_5_10.png)
     
 
 
@@ -237,22 +249,20 @@ tt$conf.int
 
 
 
-<style>
-.dl-inline {width: auto; margin:0; padding: 0}
-.dl-inline>dt, .dl-inline>dd {float: none; width: auto; display: inline-block}
-.dl-inline>dt::after {content: ":\0020"; padding-right: .5ex}
-.dl-inline>dt:not(:first-of-type) {padding-left: .5ex}
-</style><dl class=dl-inline><dt>mean in group neg</dt><dd>27.24</dd><dt>mean in group pos</dt><dd>33</dd></dl>
+<dl class=dl-horizontal>
+	<dt>mean in group neg</dt>
+		<dd>27.24</dd>
+	<dt>mean in group pos</dt>
+		<dd>33</dd>
+</dl>
 
 
 
 
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>-7.579784943499</li><li>-3.94930092907718</li></ol>
+<ol class=list-inline>
+	<li>-7.579784943499</li>
+	<li>-3.94930092907718</li>
+</ol>
 
 
 
@@ -429,12 +439,10 @@ ft$conf.int
 
 
 
-<style>
-.list-inline {list-style: none; margin:0; padding: 0}
-.list-inline>li {display: inline-block}
-.list-inline>li:not(:last-child)::after {content: "\00b7"; padding: 0 .5ex}
-</style>
-<ol class=list-inline><li>0.0413755182519714</li><li>0.23436447722542</li></ol>
+<ol class=list-inline>
+	<li>0.0413755182519714</li>
+	<li>0.23436447722542</li>
+</ol>
 
 
 
@@ -447,9 +455,9 @@ ft$conf.int
 
 ## TASK #4.1 Statistical Report with Tests Results
 - Take any data set you like, containing 2 groups of observation (balance by size) ✔
-- Create report for numerical data with appropriate tests (description of 2 groups, comparing them)
-- Create report for categorical data with appropriate tests (description of 2 groups, comparing them)
-- When comparing you should put name of method and p-value
+- Create report for numerical data with appropriate tests (description of 2 groups, comparing them) ✔
+- Create report for categorical data with appropriate tests (description of 2 groups, comparing them) ✔
+- When comparing you should put name of method and p-value ✔
 ### Example will be attached later
 
 
@@ -510,25 +518,25 @@ for (param in numericals) {
 
 
     
-![png](output_22_0.png)
+![png](output_23_0.png)
     
 
 
 
     
-![png](output_22_1.png)
+![png](output_23_1.png)
     
 
 
 
     
-![png](output_22_2.png)
+![png](output_23_2.png)
     
 
 
 
     
-![png](output_22_3.png)
+![png](output_23_3.png)
     
 
 
@@ -545,21 +553,17 @@ df[1:5] %>%
 ```
 
 
-<table class="dataframe">
-<caption>A tibble: 8 × 4</caption>
-<thead>
-	<tr><th scope=col>Parameter</th><th scope=col>Measure</th><th scope=col>setosa</th><th scope=col>virginica</th></tr>
-	<tr><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;chr&gt;</th><th scope=col>&lt;dbl&gt;</th><th scope=col>&lt;dbl&gt;</th></tr>
-</thead>
+<table>
+<thead><tr><th scope=col>Parameter</th><th scope=col>Measure</th><th scope=col>setosa</th><th scope=col>virginica</th></tr></thead>
 <tbody>
-	<tr><td>Petal.Length</td><td>mean</td><td>1.46200000</td><td>5.55200000</td></tr>
-	<tr><td>Petal.Length</td><td>var </td><td>0.03015918</td><td>0.30458776</td></tr>
-	<tr><td>Petal.Width </td><td>mean</td><td>0.24600000</td><td>2.02600000</td></tr>
-	<tr><td>Petal.Width </td><td>var </td><td>0.01110612</td><td>0.07543265</td></tr>
-	<tr><td>Sepal.Length</td><td>mean</td><td>5.00600000</td><td>6.58800000</td></tr>
-	<tr><td>Sepal.Length</td><td>var </td><td>0.12424898</td><td>0.40434286</td></tr>
-	<tr><td>Sepal.Width </td><td>mean</td><td>3.42800000</td><td>2.97400000</td></tr>
-	<tr><td>Sepal.Width </td><td>var </td><td>0.14368980</td><td>0.10400408</td></tr>
+	<tr><td>Petal.Length</td><td>mean        </td><td>1.46200000  </td><td>5.55200000  </td></tr>
+	<tr><td>Petal.Length</td><td>var         </td><td>0.03015918  </td><td>0.30458776  </td></tr>
+	<tr><td>Petal.Width </td><td>mean        </td><td>0.24600000  </td><td>2.02600000  </td></tr>
+	<tr><td>Petal.Width </td><td>var         </td><td>0.01110612  </td><td>0.07543265  </td></tr>
+	<tr><td>Sepal.Length</td><td>mean        </td><td>5.00600000  </td><td>6.58800000  </td></tr>
+	<tr><td>Sepal.Length</td><td>var         </td><td>0.12424898  </td><td>0.40434286  </td></tr>
+	<tr><td>Sepal.Width </td><td>mean        </td><td>3.42800000  </td><td>2.97400000  </td></tr>
+	<tr><td>Sepal.Width </td><td>var         </td><td>0.14368980  </td><td>0.10400408  </td></tr>
 </tbody>
 </table>
 
@@ -567,36 +571,79 @@ df[1:5] %>%
 
 
 ```R
-cats <- fisher.test(df$Cool.Flower, df$Species)
 
-pvals <- as.vector(sapply(df[1:4], function(x) t.test(x ~ Species, data = df[1:5], var.equal = F)$p.value))
-pvals <- c(pvals, as.vector(sapply(df[1:4], function(x) var.test(x ~ Species, data = df[1:5])$p.value)))
-pvals <- c(pvals, cats$p.value)
-pvals <- as.character(signif(pvals, 3))
+```
 
-methods <- as.vector(sapply(df[1:4], function(x) t.test(x ~ Species, data = df[1:5], var.equal = F)$method))
-methods <- c(methods, as.vector(sapply(df[1:4], function(x) var.test(x ~ Species, data = df[1:5])$method)))
-methods <- c(methods, cats$method)
 
-features <- names(df[1:4])
-features <- c(features, names(df[1:4]))
-features <- c(features, "Cool.Flower")
+```R
+two_groups_report <- function(data, className){
+    
+    isNum <- sapply(data, function(x) length(unique(x)) > 10)
+    isNormal <- sapply(data[isNum], function(x) shapiro.test(x)$p.value > 0.05)
+    isEqualVar <- sapply(colnames(data[isNum]), function(x) var.test(eval(parse(text=paste(x,'~',className))),data = data)$p.value > 0.05)
+    pvals <- c()
+    methods <- c()
+    columns <- c()
+                         
+    for (i in 1:length(isNum)){
+        x = colnames(df[i])
+        if(x!=className){
+        columns <- c(columns, x)
+        if (isNum[i]){
+            if (isNormal[i]){
+                if (isEqualVar[i]){
+                    # if numerical, normal and eq.var
+                    tt <- t.test(eval(parse(text=paste(x,'~',className))),data = data, var.equal = T)
+                    pvals <- c(pvals, tt$p.value)
+                    methods <- c(methods, tt$method)
+                }else {
+                    # if numerical, normal and not eq.var
+                    tt <- t.test(eval(parse(text=paste(x,'~',className))),data = data, var.equal = F)
+                    pvals <- c(pvals, tt$p.value)
+                    methods <- c(methods, tt$method)
+                }
+            }else{
+                # if numerical, but not normal
+                wx <- wilcox.test(eval(parse(text=paste(x,'~',className))),data = data)
+                pvals <- c(pvals, wx$p.value)
+                methods <- c(methods, wx$method)
+            }
+        }else{
+
+            if (length(unique(data[x])) <=2){
+                # if categorical not more than 2x2
+                ft <- fisher.test(as.factor(unlist(df[x])), as.factor(unlist(df[className])))
+                pvals <- c(pvals, ft$p.value)
+                methods <- c(methods, ft$method)
+            }else{
+                # if catgorical more than 2x2
+                ct <- chisq.test(as.factor(unlist(df[x])), as.factor(unlist(df[className])))
+                pvals <- c(pvals, ct$p.value)
+                methods <- c(methods, ct$method)
+            }
+            
+        }
+    }
+}
+    list(columns = columns, methods = methods, pvals = pvals)
+}
+```
+
+
+```R
+result <- two_groups_report(df, 'Species')
                             
-data.frame(`feature by Species` = features, p.value = pvals, method = methods) %>% knitr::kable()
+data.frame(`feature by Species` = result$columns, p.value = as.character(signif(result$pvals, 3)), method = result$methods) %>% knitr::kable()
 ```
 
 
     
     
-    |feature.by.Species |p.value  |method                             |
-    |:------------------|:--------|:----------------------------------|
-    |Sepal.Length       |3.97e-25 |Welch Two Sample t-test            |
-    |Sepal.Width        |4.57e-09 |Welch Two Sample t-test            |
-    |Petal.Length       |9.27e-50 |Welch Two Sample t-test            |
-    |Petal.Width        |2.44e-48 |Welch Two Sample t-test            |
-    |Sepal.Length       |6.37e-05 |F test to compare two variances    |
-    |Sepal.Width        |0.261    |F test to compare two variances    |
-    |Petal.Length       |1.87e-13 |F test to compare two variances    |
-    |Petal.Width        |4.17e-10 |F test to compare two variances    |
-    |Cool.Flower        |5.78e-07 |Fisher's Exact Test for Count Data |
+    |feature.by.Species |p.value  |method                                            |
+    |:------------------|:--------|:-------------------------------------------------|
+    |Sepal.Length       |6.4e-17  |Wilcoxon rank sum test with continuity correction |
+    |Sepal.Width        |4.25e-09 |Two Sample t-test                                 |
+    |Petal.Length       |5.67e-18 |Wilcoxon rank sum test with continuity correction |
+    |Petal.Width        |2.43e-18 |Wilcoxon rank sum test with continuity correction |
+    |Cool.Flower        |5.78e-07 |Fisher's Exact Test for Count Data                |
 
