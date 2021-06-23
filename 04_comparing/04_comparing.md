@@ -17,13 +17,6 @@ library(ggplot2, warn.conflicts = FALSE)
 library(MultinomialCI, warn.conflicts = FALSE)
 ```
 
-    Warning message:
-    "package 'mlbench' was built under R version 3.6.3"Warning message:
-    "package 'dplyr' was built under R version 3.6.3"Warning message:
-    "package 'tidyr' was built under R version 3.6.3"Warning message:
-    "package 'ggplot2' was built under R version 3.6.3"Warning message:
-    "package 'MultinomialCI' was built under R version 3.6.3"
-
 
 ```R
 data(PimaIndiansDiabetes2)
@@ -37,9 +30,8 @@ df <- PimaIndiansDiabetes2
 ```R
 numericals <- names(df)[2:8]
 for (param in numericals) {
-    p <- ggplot(df, aes(x = get(param), fill = diabetes)) + 
-    geom_density(alpha = 0.5) + 
-    xlab(param) + theme_bw()
+    p <- ggplot(df, aes(x = get(param), fill = diabetes)) + geom_density(alpha = 0.5) +
+        xlab(param) + theme_bw()
     print(p)
 }
 ```
@@ -103,8 +95,8 @@ for (param in numericals) {
 
 
 ```R
-# 1) check both samples for normal distribution 2) variances are homogeneous (if
-# not - Welch modification) 3) perform 2-sample t-test
+# 1) check both samples for normal distribution 2) variances are homogeneous
+# (if not - Welch modification) 3) perform 2-sample t-test
 
 # Normality test
 sh <- shapiro.test(df$pressure[df$diabetes == "neg"])
@@ -176,8 +168,8 @@ var.test(pressure ~ diabetes, data = df)
 
 
 ```R
-# actually, we are not eligible to do so in given situation! but...  var.equal =
-# FALSE
+# actually, we are not eligible to do so in given situation! but...  var.equal
+# = FALSE
 tt <- t.test(df$triceps[df$diabetes == "pos"], df$triceps[df$diabetes == "neg"])
 tt
 
@@ -327,8 +319,8 @@ round(mw$p.value, 4)
 
 
 ```R
-# t.test(..., paired = FALSE -> paired = TRUE)
-# wilcox.test(..., paired = FALSE -> paired = TRUE)
+# t.test(..., paired = FALSE -> paired = TRUE) wilcox.test(..., paired = FALSE
+# -> paired = TRUE)
 ```
 
 ## Comparing Categoricals
@@ -468,10 +460,12 @@ df <- iris
 
 
 ```R
-df <- df[df$Species %in% c('setosa', 'virginica'), ]
+df <- df[df$Species %in% c("setosa", "virginica"), ]
 df$Species <- as.factor(as.vector(df$Species))
 df$Cool.Flower <- df$Sepal.Width > mean(df$Sepal.Width)
-df$Cool.Flower <- factor(as.vector(df$Cool.Flower), labels =c('Depressive', 'Cool'))
+df$Cool.Flower <- factor(as.vector(df$Cool.Flower), labels = c("Depressive", "Cool"))
+
+df$Species <- as.factor(df$Species)
 ```
 
 
@@ -509,9 +503,8 @@ head(df) %>%
 # checking variances visually
 numericals <- names(df)[1:4]
 for (param in numericals) {
-    p <- ggplot(df, aes(x = get(param), fill = Species)) + 
-    geom_density(alpha = 0.5) + 
-    xlab(param) + theme_bw()
+    p <- ggplot(df, aes(x = get(param), fill = Species)) + geom_density(alpha = 0.5) +
+        xlab(param) + theme_bw()
     print(p)
 }
 ```
@@ -543,12 +536,11 @@ for (param in numericals) {
 
 ```R
 # checking variances and means
-df[1:5] %>% 
-    gather(key = 'Parameter', value = 'Value', -Species) %>% 
-    group_by(Species, Parameter) %>% 
-    summarize(mean = mean(Value, na.rm = T),
-            var = var(Value, na.rm = T)) %>%  
-    gather(key = 'Measure', value = 'Value', -c(Species, Parameter))  %>%  
+df[1:5] %>%
+    gather(key = "Parameter", value = "Value", -Species) %>%
+    group_by(Species, Parameter) %>%
+    summarize(mean = mean(Value, na.rm = T), var = var(Value, na.rm = T)) %>%
+    gather(key = "Measure", value = "Value", -c(Species, Parameter)) %>%
     spread(key = Species, value = Value)
 ```
 
@@ -571,69 +563,81 @@ df[1:5] %>%
 
 
 ```R
+two_groups_report <- function(data, className) {
 
-```
+    firstClass <- data[data[, c(className)] == unique(data[, c(className)])[[1]],]
+    secondClass <- data[data[, c(className)] == unique(data[, c(className)])[[2]],]
 
-
-```R
-two_groups_report <- function(data, className){
-    
     isNum <- sapply(data, function(x) length(unique(x)) > 10)
-    isNormal <- sapply(data[isNum], function(x) shapiro.test(x)$p.value > 0.05)
-    isEqualVar <- sapply(colnames(data[isNum]), function(x) var.test(eval(parse(text=paste(x,'~',className))),data = data)$p.value > 0.05)
+                    
+    # check for normality class independently       
+    isNormalA <- sapply(firstClass[isNum], function(x) shapiro.test(x)$p.value > 0.05)
+    isNormalB <- sapply(secondClass[isNum], function(x) shapiro.test(x)$p.value > 0.05)
+                        
+                        
+    isEqualVar <- sapply(colnames(secondClass[isNum]), function(x) var.test(eval(parse(text = paste(x,
+        "~", className))), data = data)$p.value > 0.05)
+
+    isNormal <- isNormalA & isNormalB
+
+
     pvals <- c()
     methods <- c()
     columns <- c()
-                         
-    for (i in 1:length(isNum)){
-        x = colnames(df[i])
-        if(x!=className){
-        columns <- c(columns, x)
-        if (isNum[i]){
-            if (isNormal[i]){
-                if (isEqualVar[i]){
-                    # if numerical, normal and eq.var
-                    tt <- t.test(eval(parse(text=paste(x,'~',className))),data = data, var.equal = T)
-                    pvals <- c(pvals, tt$p.value)
-                    methods <- c(methods, tt$method)
-                }else {
-                    # if numerical, normal and not eq.var
-                    tt <- t.test(eval(parse(text=paste(x,'~',className))),data = data, var.equal = F)
-                    pvals <- c(pvals, tt$p.value)
-                    methods <- c(methods, tt$method)
-                }
-            }else{
-                # if numerical, but not normal
-                wx <- wilcox.test(eval(parse(text=paste(x,'~',className))),data = data)
-                pvals <- c(pvals, wx$p.value)
-                methods <- c(methods, wx$method)
-            }
-        }else{
 
-            if (length(unique(data[x])) <=2){
-                # if categorical not more than 2x2
-                ft <- fisher.test(as.factor(unlist(df[x])), as.factor(unlist(df[className])))
-                pvals <- c(pvals, ft$p.value)
-                methods <- c(methods, ft$method)
-            }else{
-                # if catgorical more than 2x2
-                ct <- chisq.test(as.factor(unlist(df[x])), as.factor(unlist(df[className])))
-                pvals <- c(pvals, ct$p.value)
-                methods <- c(methods, ct$method)
+    for (i in 1:length(isNum)) {
+        x = colnames(df[i])
+        if (x != className) {
+            columns <- c(columns, x)
+            if (isNum[i]) {
+                if (isNormal[i]) {
+                  if (isEqualVar[i]) {
+                    # if numerical, normal and eq.var
+                    tt <- t.test(eval(parse(text = paste(x, "~", className))), data = data,
+                      var.equal = T)
+                    pvals <- c(pvals, tt$p.value)
+                    methods <- c(methods, tt$method)
+                  } else {
+                    # if numerical, normal and not eq.var
+                    tt <- t.test(eval(parse(text = paste(x, "~", className))), data = data,
+                      var.equal = F)
+                    pvals <- c(pvals, tt$p.value)
+                    methods <- c(methods, tt$method)
+                  }
+                } else {
+                  # if numerical, but not normal
+                  wx <- wilcox.test(eval(parse(text = paste(x, "~", className))),
+                    data = data)
+                  pvals <- c(pvals, wx$p.value)
+                  methods <- c(methods, wx$method)
+                }
+            } else {
+                
+                if ((length(unique(data[x])) <= 2) | min(table(data[x])) < 5 ) {
+                  # if categorical not more than 2x2 or sample size is small
+                  ft <- fisher.test(as.factor(unlist(df[x])), as.factor(unlist(df[className])))
+                  pvals <- c(pvals, ft$p.value)
+                  methods <- c(methods, ft$method)
+                } else {
+                  # if catgorical more than 2x2
+                  ct <- chisq.test(as.factor(unlist(df[x])), as.factor(unlist(df[className])))
+                  pvals <- c(pvals, ct$p.value)
+                  methods <- c(methods, ct$method)
+                }
+
             }
-            
         }
     }
-}
     list(columns = columns, methods = methods, pvals = pvals)
 }
 ```
 
 
 ```R
-result <- two_groups_report(df, 'Species')
-                            
-data.frame(`feature by Species` = result$columns, p.value = as.character(signif(result$pvals, 3)), method = result$methods) %>% knitr::kable()
+result <- two_groups_report(df, "Species")
+
+data.frame(`feature by Species` = result$columns, p.value = as.character(signif(result$pvals,3)), 
+           method = result$methods) %>% knitr::kable()
 ```
 
 
@@ -641,9 +645,9 @@ data.frame(`feature by Species` = result$columns, p.value = as.character(signif(
     
     |feature.by.Species |p.value  |method                                            |
     |:------------------|:--------|:-------------------------------------------------|
-    |Sepal.Length       |6.4e-17  |Wilcoxon rank sum test with continuity correction |
+    |Sepal.Length       |3.97e-25 |Welch Two Sample t-test                           |
     |Sepal.Width        |4.25e-09 |Two Sample t-test                                 |
-    |Petal.Length       |5.67e-18 |Wilcoxon rank sum test with continuity correction |
+    |Petal.Length       |9.27e-50 |Welch Two Sample t-test                           |
     |Petal.Width        |2.43e-18 |Wilcoxon rank sum test with continuity correction |
     |Cool.Flower        |5.78e-07 |Fisher's Exact Test for Count Data                |
 
