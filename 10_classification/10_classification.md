@@ -105,7 +105,7 @@ corrplot.mixed(c)
 
 ```R
 # - 'V7', 'V3' - drop one of the most correlated features, above 0.5
-columns_to_use <- c("V5", "V4", "V8", "V27", "Class")
+columns_to_use <- c("V5", "V8", "V27", "Class")
 ```
 
 # KNN
@@ -123,12 +123,12 @@ round(mean(pred_knn == ionosphere$test$Class) * 100, 2)
 
             Real
     pred_knn bad good
-        bad   31    4
-        good   6   63
+        bad   28    3
+        good   9   64
 
 
 
-90.38
+88.46
 
 
 # Logistic regression
@@ -158,23 +158,22 @@ summary(glm_fit)
     
     Deviance Residuals: 
         Min       1Q   Median       3Q      Max  
-    -2.6532  -0.4461   0.4379   0.6933   1.7299  
+    -2.4213  -0.4770   0.4607   0.6971   1.7870  
     
     Coefficients:
                 Estimate Std. Error z value Pr(>|z|)    
-    (Intercept)  -1.1407     0.3592  -3.175  0.00150 ** 
-    V5            3.6850     0.5397   6.828  8.6e-12 ***
-    V4            0.9058     0.4431   2.044  0.04096 *  
-    V8            1.1565     0.3751   3.083  0.00205 ** 
-    V27          -1.1169     0.4180  -2.672  0.00754 ** 
+    (Intercept)  -1.1619     0.3650  -3.183  0.00146 ** 
+    V5            3.5557     0.5260   6.760 1.38e-11 ***
+    V8            1.4372     0.3545   4.054 5.03e-05 ***
+    V27          -0.9543     0.3936  -2.425  0.01532 *  
     ---
     Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
     
     (Dispersion parameter for binomial family taken to be 1)
     
         Null deviance: 322.88  on 246  degrees of freedom
-    Residual deviance: 212.59  on 242  degrees of freedom
-    AIC: 222.59
+    Residual deviance: 216.83  on 243  degrees of freedom
+    AIC: 224.83
     
     Number of Fisher Scoring iterations: 5
     
@@ -190,19 +189,19 @@ table(pred_glm, Real = ionosphere$test$Class)
 
             Real
     pred_glm bad good
-       FALSE  21    6
-       TRUE   16   61
+       FALSE  20    3
+       TRUE   17   64
 
 
 
 ```R
-(26 + 61)/(26 + 59 + 8 + 11)
+(20 + 64)/(26 + 59 + 8 + 11)
 ```
 
 
-0.836538461538462
+0.807692307692308
 
 
 # Result
 
-K-nearest neighbors performed better on test data (~92% acc vs. ~84% acc) while using the same features for both models and using a balanced, stratified test sample.
+K-nearest neighbors performed better on test data (~88% acc vs. ~81% acc) while using the same features for both models and using a balanced, stratified test sample.
